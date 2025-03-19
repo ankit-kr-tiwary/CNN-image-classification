@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify, render_template_string
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -47,4 +48,5 @@ def predict():
         return jsonify({'prediction': result})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Update the app to bind to the correct port and disable debug mode for production
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
